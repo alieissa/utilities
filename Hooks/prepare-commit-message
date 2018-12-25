@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+import sys
+from subprocess import check_output
+
+# The temporary git commit message file. Usually .git/COMMIT_EDITMSG.
+COMMIT_MSG_FILE=sys.argv[1]
+GIT_BRANCH_NAME=check_output(['git', 'symbolic-ref', '--short', 'HEAD'])
+
+def get_message_prefix(branch):
+    project_code=branch.split('-')[0]
+    issue_code=branch.split('-')[1]
+    return project_code + '-' + issue_code
+
+def get_message(prefix, user_msg):
+    prefix_pos = user_msg.find(prefix)
+
+    # if user message in format 'ABC-XXXX-description'
+    # do nothing. else return message in above format
+    return (
+        user_msg if prefix_pos == 0
+        else '%s %s' % (prefix, user_msg)
+    )
+
+with open(COMMIT_MSG_FILE, 'r+') as cmf:
+    # Important to remove new line and carriage returns
+    commit_msg = cmf.read().rstrip('\r\n')
+    commit_msg_prefix = get_message_prefix(GIT_BRANCH_NAME)
+
+    cmf.seek(0, 0)
+    cmf.write(get_message(commit_msg_prefix, commit_msg))
