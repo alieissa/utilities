@@ -12,6 +12,11 @@ yarn add css-loader style-loader --dev
 echo "Adding webpack packages ----------------------"
 yarn add webpack webpack-cli webpack-dev-server html-webpack-plugin --dev
 
+echo "Adding testing packages ----------------------"
+yarn add --dev jest jest-cli enzyme
+# This is needed to make jest work with babel version 7
+yarn add --dev babel-jest babel-core@^7.0.0-bridge.0 @babel/core
+
 # Create index.js file
 cat <<EOF > src/index.js
 import React from 'react';
