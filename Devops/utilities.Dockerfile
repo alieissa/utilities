@@ -7,6 +7,9 @@ RUN apt-get update && apt-get install -y vim
 ENV HOME /root
 WORKDIR $HOME
 
+# Expose ports between 2000 and 9000. Use -p option when running to expose to host
+EXPOSE 2000-9000
+RUN npm i create-react-app jest jest-cli enzyme  -g
 RUN npm i -g eslint
 
 # Utilities repo holds all useful scripts and config files
