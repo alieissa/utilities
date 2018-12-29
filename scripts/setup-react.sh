@@ -10,25 +10,26 @@ echo "Adding CSS loaders ----------------------"
 yarn add css-loader style-loader --dev
 
 echo "Adding webpack packages ----------------------"
-yarn add webpack webpack-cli webpack-dev-server --dev
+yarn add webpack webpack-cli webpack-dev-server html-webpack-plugin --dev
 
 # Create index.js file
-cat <<EOF > index.js
+cat <<EOF > src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('app-container'));
 EOF
 
 # Create .babelrc set presets
 cat <<EOF > webpack.config.js
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'index.js'),
+  entry: path.join(__dirname, "src", "index.js"),
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.join(__dirname, "dist"),
     filename: "index_bundle.js"
   },
   devServer: {
@@ -50,7 +51,10 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  }
+  },
+  plugins: [new HtmlWebpackPlugin({
+    template: "index.html"
+  })]
 };
 EOF
 
