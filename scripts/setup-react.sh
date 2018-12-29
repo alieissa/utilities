@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # echo "Adding React packes ----------------------"
-yarn add react react-dom --save
+yarn add react react-dom
 
 # echo "Adding Babel packages ----------------------"
-yarn add @babel/core babel-loader @babel/preset-env @babel/preset-react --save-dev
+yarn add @babel/core babel-loader @babel/preset-env @babel/preset-react --dev
 
 # echo "Adding CSS loaders ----------------------"
-yarn add css-loader style-loader --save-dev
+yarn add css-loader style-loader --dev
 
 # Create .babelrc set presets
 cat <<EOF > webpack.config.js
