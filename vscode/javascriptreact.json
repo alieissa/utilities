@@ -1,0 +1,48 @@
+{
+	"import test packages": {
+		"prefix": "imptest",
+		"body": [
+			"import React from 'react'",
+			"import { shallow } from 'enzyme'",
+			"import sinon from 'sinon'"
+		]
+	},
+	"describe test suite": {
+		"prefix": "testdec",
+		"body": [
+            "describe('$1', () => {",
+                "\t",
+			"}"
+		]
+	},
+	"arrow function": {
+		"prefix": "fun0",
+		"body": [
+			"() => {",
+				"$1",
+			"}"
+		]
+	},
+	"react class component": {
+		"prefix": "cmpclass",
+		"body": [
+			"import React from 'react'",
+			"import PropTypes from 'prop-types'",
+			"",
+			"export class $1 extends React.Component {",
+				"",
+				"\trender() {",
+					"\t\t$2",
+				"\t}",
+			"}",
+			"",
+			"$1.defaultProps = {",
+				"",
+			"}",
+			"",
+			"$1.propTypes = {",
+				"",
+			"}"	
+		]
+	}
+}
